@@ -92,25 +92,6 @@ impl CounterManager {
         }
     }
 
-    /*pub fn check_flags(&mut self, match_results: &ArgMatches) {
-        let mut is_bytes_flag = match_results.get_flag(ByteCounter::ARG_ID);
-        let is_chars_flag = match_results.get_flag(CharacterCounter::ARG_ID);
-        let mut is_lines_flag = match_results.get_flag(LineCounter::ARG_ID);
-        let is_max_line_length_flag = match_results.get_flag(MaxLineLengthCounter::ARG_ID);
-        let mut is_words_flag = match_results.get_flag(WordCounter::ARG_ID);
-        let is_default = !(is_bytes_flag || is_chars_flag || is_lines_flag || is_max_line_length_flag || is_words_flag || is_max_line_length_flag);
-        if is_default {
-            is_lines_flag = true;
-            is_words_flag = true;
-            is_bytes_flag = true;
-        }
-
-        self.byte.details.is_requested = is_bytes_flag;
-        self.character.details.is_requested = is_chars_flag;
-        self.word.details.is_requested = is_words_flag;
-        self.line.details.is_requested = is_lines_flag;
-        self.max_line_length.details.is_requested = is_max_line_length_flag;
-    }*/
     pub fn respond(&mut self) -> String {
         let mut response = String::new();
         if self.line.details.is_requested {

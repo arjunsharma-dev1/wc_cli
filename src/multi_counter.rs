@@ -1,5 +1,6 @@
 use std::collections::HashMap;
 use clap::ArgMatches;
+use crate::CmdArgManager;
 use crate::counter::byte::ByteCounter;
 use crate::counter::character::CharacterCounter;
 use crate::counter::CounterPostProcessor;
@@ -27,27 +28,10 @@ impl MultiCounterManager {
         instance
     }
 
-    pub fn assign_flags(mut self, match_results: &ArgMatches) -> Self {
-        let mut is_bytes_flag = match_results.get_flag(ByteCounter::ARG_ID);
-        let is_chars_flag = match_results.get_flag(CharacterCounter::ARG_ID);
-        let mut is_lines_flag = match_results.get_flag(LineCounter::ARG_ID);
-        let is_max_line_length_flag = match_results.get_flag(MaxLineLengthCounter::ARG_ID);
-        let mut is_words_flag = match_results.get_flag(WordCounter::ARG_ID);
-        let is_default = !(is_bytes_flag || is_chars_flag || is_lines_flag || is_max_line_length_flag || is_words_flag || is_max_line_length_flag);
-        if is_default {
-            is_lines_flag = true;
-            is_words_flag = true;
-            is_bytes_flag = true;
-        }
+    pub fn assign_flags(mut self, cmd_arg_manager: &mut CmdArgManager) -> Self {
 
         for (_, counter) in &mut self.counters {
-            counter.assign_flag(
-                is_bytes_flag,
-                is_chars_flag,
-                is_words_flag,
-                is_lines_flag,
-                is_max_line_length_flag
-            );
+            cmd_arg_manager.assign_flags(counter);
         }
 
         self

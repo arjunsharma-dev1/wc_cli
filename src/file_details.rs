@@ -1,8 +1,7 @@
 use std::fs::File;
 use std::io;
 use std::io::{BufReader, Read};
-use clap::ArgMatches;
-use crate::constants::FileArg;
+use crate::CmdArgManager;
 
 pub struct FileDetails {
     pub contents: String,
@@ -18,15 +17,13 @@ impl FileDetails {
     }
 }
 
-pub fn get_contents_from_files_or_stdin(match_results: &ArgMatches) -> Vec<FileDetails> {
-    let file_path_option = match_results.get_many::<String>(FileArg::ID);
+pub fn get_contents_from_files_or_stdin(cmd_arg_manager: &mut CmdArgManager) -> Vec<FileDetails> {
     let mut file_details: Vec<FileDetails> = Vec::new();
-
-    if file_path_option.is_none() {
+    if cmd_arg_manager.is_input_from_stdin() {
         let contents = read_from_stdin();
         file_details.push(FileDetails::new(contents, String::new()));
     } else {
-        let mut file_paths = file_path_option.unwrap();
+        let mut file_paths = cmd_arg_manager.file_paths_option.as_mut().unwrap();
         while let Some(file_path_option) = file_paths.next() {
             let file_path = file_path_option.to_string();
             let contents = read_from_file(&file_path);
