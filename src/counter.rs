@@ -9,7 +9,7 @@ pub mod manager;
 pub trait Counter {
     fn count(&mut self, char: char);
     fn count_if_requested(&mut self, char: char);
-    fn add_count(&mut self, count: usize) {}
+    fn add_count(&mut self, _count: usize) {}
     fn get_count(&mut self) -> usize;
 }
 

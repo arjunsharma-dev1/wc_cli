@@ -1,13 +1,7 @@
 use std::collections::HashMap;
-use clap::ArgMatches;
 use crate::CmdArgManager;
-use crate::counter::byte::ByteCounter;
-use crate::counter::character::CharacterCounter;
 use crate::counter::CounterPostProcessor;
-use crate::counter::line::LineCounter;
 use crate::counter::manager::CounterManager;
-use crate::counter::max_line_length::MaxLineLengthCounter;
-use crate::counter::word::WordCounter;
 use crate::file_details::FileDetails;
 use crate::counter::Counter;
 

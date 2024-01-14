@@ -161,7 +161,7 @@ impl Counter for CounterManager {
         self.max_line_length.count_if_requested(char);
     }
 
-    fn count_if_requested(&mut self, char: char) { todo!() }
+    fn count_if_requested(&mut self, _char: char) { todo!() }
 
     fn get_count(&mut self) -> usize { todo!() }
 }
